@@ -13,14 +13,16 @@
   </div>
 <% end %>
 
-<table>
+<table class="table table-striped">
   <!-- Table headers -->
   <tr>
-    <td><strong><%= "Branch" %></strong></td>
-    <td><strong><%= "Start date" %></strong></td>
-    <td><strong><%= "End date" %></strong></td>
-    <td><strong><%= "Consumption data" %></strong></td>
-    <td><strong><%= "Verified" %></strong></td>
+    <th><%= "Branch" %></th>
+    <th><%= "Start date" %></th>
+    <th><%= "End date" %></th>
+    <th colspan="2"><%= "Consumption data" %></th>
+    <th><%= "Verified" %></th>
+    <th></th>
+    <th></th>
   </tr>
 
   <!-- "New" form in table -->
@@ -29,8 +31,10 @@
       <td><%= f.select :branch_id, @branches.map { |branch| [branch.name, branch.id] } %></td>
       <td><%= f.text_field :start_date, placeholder: "YYYY-MM-DD" %></td>
       <td><%= f.text_field :end_date, placeholder: "YYYY-MM-DD" %></td>
-      <td><%= f.text_field :consumption_data %> kWh</td>
+      <td><%= f.text_field :consumption_data, id: "consumption_data-field" %></td>
+      <td>kWh</td>
       <td><%= f.text_field :verified %></td>
+      <td></td>
       <td><%= f.submit "Submit" %></td>
     <% end %>
   </tr>
@@ -42,6 +46,7 @@
       <td><%= registration.start_date %></td>
       <td><%= registration.end_date %></td>
       <td><%= registration.consumption_data %> kWh</td>
+      <td></td>
       <td><%= registration.verified %></td>
       <td><%= link_to "Edit", edit_registration_path(registration) %></td>
       <td><%= link_to "Delete", registration_path(registration), method: :delete, data: {confirm: "Are you sure?"} %></td>
