@@ -7,7 +7,7 @@
 
 <table>
   <% @branches.each do |branch| %>
-    <tr>
+    <tr id='<%= branch.id %>'>
       <td><%= branch.name %></td>
       <td><%= link_to "Edit", edit_branch_path(branch) %></td>
       <td><%= link_to "Delete", branch, method: :delete %></td>
