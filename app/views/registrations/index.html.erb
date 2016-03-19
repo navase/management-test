@@ -1,0 +1,50 @@
+<h1>Registrations</h1>
+
+<!-- Errors when adding an invalid registration -->
+<% if @registration.errors.any? %>
+  <div class="alert">
+    <p><%= pluralize(@registration.errors.count, "error") %> prohibited this registration from being saved:</p>
+
+    <ul>
+    <% @registration.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<table>
+  <!-- Table headers -->
+  <tr>
+    <td><strong><%= "Branch" %></strong></td>
+    <td><strong><%= "Start date" %></strong></td>
+    <td><strong><%= "End date" %></strong></td>
+    <td><strong><%= "Consumption data" %></strong></td>
+    <td><strong><%= "Verified" %></strong></td>
+  </tr>
+
+  <!-- "New" form in table -->
+  <tr>
+    <%= form_for(@registration) do |f| %>
+      <td><%= f.select :branch_id, @branches.map { |branch| [branch.name, branch.id] } %></td>
+      <td><%= f.text_field :start_date, placeholder: "YYYY-MM-DD" %></td>
+      <td><%= f.text_field :end_date, placeholder: "YYYY-MM-DD" %></td>
+      <td><%= f.text_field :consumption_data %> kWh</td>
+      <td><%= f.text_field :verified %></td>
+      <td><%= f.submit "Submit" %></td>
+    <% end %>
+  </tr>
+
+  <!-- List of all registrations -->
+  <% @registrations.each do |registration| %>
+    <tr>
+      <td><%= registration.branch.name %></td>
+      <td><%= registration.start_date %></td>
+      <td><%= registration.end_date %></td>
+      <td><%= registration.consumption_data %> kWh</td>
+      <td><%= registration.verified %></td>
+      <td><%= link_to "Edit", edit_registration_path(registration) %></td>
+      <td><%= link_to "Delete", registration_path(registration), method: :delete, data: {confirm: "Are you sure?"} %></td>
+    </tr>
+  <% end %>
+</table>
