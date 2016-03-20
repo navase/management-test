@@ -1,12 +1,12 @@
-<h1>Registrations</h1>
+<h1>Records</h1>
 
-<!-- Errors when adding an invalid registration -->
-<% if @registration.errors.any? %>
+<!-- Errors when adding an invalid record -->
+<% if @record.errors.any? %>
   <div class="alert">
-    <p><%= pluralize(@registration.errors.count, "error") %> prohibited this registration from being saved:</p>
+    <p><%= pluralize(@record.errors.count, "error") %> prohibited this record from being saved:</p>
 
     <ul>
-    <% @registration.errors.full_messages.each do |msg| %>
+    <% @record.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>
@@ -27,7 +27,7 @@
 
   <!-- "New" form in table -->
   <tr>
-    <%= form_for(@registration) do |f| %>
+    <%= form_for(@record) do |f| %>
       <td><%= f.select :branch_id, @branches.map { |branch| [branch.name, branch.id] } %></td>
       <td><%= f.text_field :start_date, placeholder: "YYYY-MM-DD" %></td>
       <td><%= f.text_field :end_date, placeholder: "YYYY-MM-DD" %></td>
@@ -39,17 +39,17 @@
     <% end %>
   </tr>
 
-  <!-- List of all registrations -->
-  <% @registrations.each do |registration| %>
+  <!-- List of all records -->
+  <% @records.each do |record| %>
     <tr>
-      <td><%= registration.branch.name %></td>
-      <td><%= registration.start_date %></td>
-      <td><%= registration.end_date %></td>
-      <td><%= registration.consumption_data %> kWh</td>
+      <td><%= record.branch.name %></td>
+      <td><%= record.start_date %></td>
+      <td><%= record.end_date %></td>
+      <td><%= record.consumption_data %> kWh</td>
       <td></td>
-      <td><%= registration.verified %></td>
-      <td><%= link_to "Edit", edit_registration_path(registration) %></td>
-      <td><%= link_to "Delete", registration_path(registration), method: :delete, data: {confirm: "Are you sure?"} %></td>
+      <td><%= record.verified %></td>
+      <td><%= link_to "Edit", edit_record_path(record) %></td>
+      <td><%= link_to "Delete", record_path(record), method: :delete, data: {confirm: "Are you sure?"} %></td>
     </tr>
   <% end %>
 </table>

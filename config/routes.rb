@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root 'registrations#index'
-  
+  root 'records#index'
+
   resources :branches
-  resources :registrations
+  resources :records
 
   devise_for :users
 end
