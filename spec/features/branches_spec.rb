@@ -17,9 +17,9 @@ RSpec.feature "Branches", type: :feature do
     click_link "New branch"
     expect(page).to have_selector("h1", text: "New branch")
 
-    fill_in "Name", with: "Amsterdam"
+    fill_in "Name", with: "Amsterdam1"
     click_button "Submit"
-    expect(page).to have_content("Amsterdam")
+    expect(page).to have_content("Amsterdam1")
   end
 
   scenario "Editing a branch" do
@@ -29,11 +29,11 @@ RSpec.feature "Branches", type: :feature do
     click_link "New branch"
     expect(page).to have_selector("h1", text: "New branch")
 
-    fill_in "Name", with: "Amsterdam"
+    fill_in "Name", with: "Amsterdam2"
     click_button "Submit"
-    expect(page).to have_content("Amsterdam")
+    expect(page).to have_content("Amsterdam2")
 
-    within find('tr', text: 'Amsterdam') do
+    within find('tr', text: 'Amsterdam2') do
       click_link 'Edit'
     end
 
@@ -51,14 +51,14 @@ RSpec.feature "Branches", type: :feature do
     click_link "New branch"
     expect(page).to have_selector("h1", text: "New branch")
 
-    fill_in "Name", with: "Amsterdam"
+    fill_in "Name", with: "Amsterdam3"
     click_button "Submit"
-    expect(page).to have_content("Amsterdam")
+    expect(page).to have_content("Amsterdam3")
 
-    within find('tr', text: 'Amsterdam') do
+    within find('tr', text: 'Amsterdam3') do
       click_link 'Delete'
     end
-    expect(page).to_not have_content("Amsterdam")
+    expect(page).to_not have_content("Amsterdam3")
   end
 
 end

@@ -9,6 +9,8 @@ require 'rspec/rails'
 require 'devise'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'best_in_place'
+require 'best_in_place/test_helpers'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -61,7 +63,14 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
   config.include Warden::Test::Helpers
+
   config.before :suite do
     Warden.test_mode!
   end
+
+  config.after :each do
+    Warden.test_reset!
+  end
+
+  config.include BestInPlace::TestHelpers
 end
