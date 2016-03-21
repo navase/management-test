@@ -23,5 +23,5 @@ en:
   hello: "Hello world"
 
 en:
-  TrueClass: "Yes"
-  FalseClass: "No"
+  TrueClass: "✔"
+  FalseClass: "-"
