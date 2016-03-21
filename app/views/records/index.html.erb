@@ -33,7 +33,13 @@
       <td><%= f.text_field :end_date, placeholder: "YYYY-MM-DD" %></td>
       <td><%= f.text_field :consumption_data, id: "consumption_data-field" %></td>
       <td>kWh</td>
-      <td><%= f.check_box :verified %></td>
+
+      <% if current_user.admin? %>
+        <td><%= f.check_box :verified %></td>
+      <% else %>
+        <td>✘</td>
+      <% end %>
+
       <td></td>
       <td><%= f.submit "Submit" %></td>
     <% end %>
