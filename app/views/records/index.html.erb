@@ -34,10 +34,11 @@
       <td><%= f.text_field :consumption_data, id: "consumption_data-field" %></td>
       <td>kWh</td>
 
+      <!-- Only admin can verify when adding a record -->
       <% if current_user.admin? %>
         <td><%= f.check_box :verified %></td>
       <% else %>
-        <td>✘</td>
+        <td>-</td>
       <% end %>
 
       <td></td>
@@ -53,9 +54,24 @@
       <td><%= record.end_date %></td>
       <td><%= record.consumption_data %> kWh</td>
       <td></td>
-      <td><%= t record.verified.class %></td>
-      <td><%= link_to "Edit", edit_record_path(record) %></td>
-      <td><%= link_to "Delete", record_path(record), method: :delete, data: {confirm: "Are you sure?"} %></td>
+
+      <!-- Only admin can verify an existing record -->
+      <% if current_user.admin? %>
+        <!-- Edit in place -->
+        <td><%= best_in_place record, :verified, as: :checkbox, collection: ["-", "✔"] %></td>
+      <% else %>
+        <!-- Translate: checkmark instead of true/false -->
+        <td><%= translate(record.verified.class) %></td>
+      <% end %>
+
+      <!-- Only edit and delete links when record is not yet verified -->
+      <% if record.verified %>
+        <td></td>
+        <td></td>
+      <% else %>
+        <td><%= link_to "Edit", edit_record_path(record) %></td>
+        <td><%= link_to "Delete", record_path(record), method: :delete, data: {confirm: "Are you sure?"} %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
