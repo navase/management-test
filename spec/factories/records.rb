@@ -7,7 +7,7 @@ FactoryGirl.define do
     branch_id 1
   end
 
-  factory :invalid_recorn, parent: :record do
+  factory :invalid_record, parent: :record do
     start_date nil
   end
 end

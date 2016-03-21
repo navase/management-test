@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe RecordsController, type: :controller do
   record = FactoryGirl.create(:record)
-
+  login_user
+  
   describe "GET #index" do
     it "renders the :index view" do
       get :index

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BranchesController, type: :controller do
   branch = FactoryGirl.create(:branch)
+  login_user
 
   describe "GET #index" do
     it "renders the :index view" do
