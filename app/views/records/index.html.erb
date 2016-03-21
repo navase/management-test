@@ -33,7 +33,7 @@
       <td><%= f.text_field :end_date, placeholder: "YYYY-MM-DD" %></td>
       <td><%= f.text_field :consumption_data, id: "consumption_data-field" %></td>
       <td>kWh</td>
-      <td><%= f.text_field :verified %></td>
+      <td><%= f.check_box :verified %></td>
       <td></td>
       <td><%= f.submit "Submit" %></td>
     <% end %>
@@ -47,7 +47,7 @@
       <td><%= record.end_date %></td>
       <td><%= record.consumption_data %> kWh</td>
       <td></td>
-      <td><%= record.verified %></td>
+      <td><%= t record.verified.class %></td>
       <td><%= link_to "Edit", edit_record_path(record) %></td>
       <td><%= link_to "Delete", record_path(record), method: :delete, data: {confirm: "Are you sure?"} %></td>
     </tr>
