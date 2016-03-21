@@ -15,3 +15,8 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+//= require best_in_place
+
+$(document).ready(function($) {
+  $('.best_in_place').best_in_place();
+});

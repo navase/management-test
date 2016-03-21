@@ -67,3 +67,5 @@ gem 'bootstrap-sass'
 gem 'devise'
 # CanCanCan for authorization
 gem 'cancancan', '~> 1.10'
+# Best in Place uses jQuery to edit stuff in index without forms
+gem 'best_in_place', github: 'seuros/best_in_place'

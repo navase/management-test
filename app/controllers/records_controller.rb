@@ -29,10 +29,14 @@ class RecordsController < ApplicationController
   def update
     @record = Record.find(params[:id])
 
-    if @record.update(record_params)
-      redirect_to records_path
-    else
-      render :edit
+    respond_to do |format|
+      if @record.update(record_params)
+        format.html { redirect_to records_path }
+        format.json { respond_with_bip(@record) }
+      else
+        format.html { render :edit }
+        format.json { respond_with_bip(@record) }
+      end
     end
   end
 
