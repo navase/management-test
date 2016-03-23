@@ -1,3 +1,68 @@
 <h1>Edit record</h1>
 
-<%= render 'form' %>
+<% if @record.errors.any? %>
+  <div class="alert">
+    <h2><%= pluralize(@record.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+    <ul>
+    <% @record.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="row">
+  <form role="form" class="form-horizontal">
+    <%= form_for(@record) do |f| %>
+
+      <div class="form-group">
+        <%= f.label :branch_id, class: "control-label col-md-2" %>
+        <div class="col-md-10">
+          <%= f.select :branch_id, @branches.map { |branch| [branch.name, branch.id] }, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :start_date, class: "control-label col-md-2" %>
+        <div class="col-md-2">
+          <%= f.text_field :start_date, placeholder: "DD-MM-YYYY", class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :end_date, class: "control-label col-md-2" %>
+        <div class="col-md-2">
+          <%= f.text_field :end_date, placeholder: "DD-MM-YYYY", class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :consumption_data, class: "control-label col-md-2" %>
+        <div class="col-md-2">
+          <%= f.text_field :consumption_data, class: "form-control" %>
+        </div>
+        <div class="col-md-1">
+          <p>kWh</p>
+        </div>
+      </div>
+
+      <% if current_user.admin? %>
+        <div class="form-group">
+          <%= f.label :verified, class: "control-label col-md-2" %>
+          <div class="col-md-2">
+            <%= f.check_box :verified %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <p><%= f.submit "Submit" %></p>
+          <p><%= link_to "Back", records_path %></p>
+        </div>
+      </div>
+
+    <% end %>
+  </form>
+</div>
